@@ -5,22 +5,35 @@
         </title>
     </head>
     <body>
-        <svg id="dynamicSector1" width="200" height="200"></svg>
+        <svg id="1" width="500" height="500"></svg>
 <script>
     function createSector(fromangle, angle) {
     const rad = angle * Math.PI / 180;
     const fromrad = fromangle * Math.PI / 180;
     const rrad = rad + fromrad;
-    const x = 100 + 100 * Math.sin(rad);
-    const y = 100 - 100 * Math.cos(rad);
-    const fx = 100 + 100 * Math.sin(fromrad);
-    const fy = 100 - 100 * Math.cos(fromrad);
-    return `M100,100 L${fx},${fy} A100,100 0 ${angle > 180 ? 1 : 0},1 ${x},${y} Z`;
+    const x = 250 + 250 * Math.sin(rad);
+    const y = 250 - 250 * Math.cos(rad);
+    const fx = 250 + 250 * Math.sin(fromrad);
+    const fy = 250 - 250 * Math.cos(fromrad);
+    return `M250,250 L${fx},${fy} A250,250 0 ${angle - fromangle > 180 ? 1 : 0},1 ${x},${y} Z`;
     }
+    arcs = [8, 10, 7, 5, 10, 20, 30, 10]
+    texts = ["3个小乌龟", "谢谢惠顾", "3元", "2元", "1元", "5毛", "1个小乌龟", "谢谢惠顾"]
+    colours = ["red", "blue", "green", "orange", "purple", "green", "red", "blue"]
+    function show(offset){
+        now = offset;
+        document.getElementById('1').innerHTML = ""
+        for(let i=1;i<=8;i++){
+            document.getElementById('1').innerHTML += `
+            <path d="${createSector(now, now + arcs[i-1] * 3.6)}" fill="${colours[i-1]}"/>
+            `;
+            now += arcs[i-1] * 3.6;
+        }
+    }
+    function rotate(){
 
-    document.getElementById('dynamicSector1').innerHTML = `
-    <path d="${createSector(0, 120)}" fill="green"/>
-    `;
+    }
+    show(0)
     </script>
 
     </body>
