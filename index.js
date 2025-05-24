@@ -138,9 +138,9 @@ async function rotate() {
       t[k] +
       kkk -
       Math.random() * 5 +
-      360 * Math.floor(Math.random() * 3 + 2);
+      360 * Math.floor(Math.random() * 5 + 3);
   } else {
-    tar = Math.random() * 4 * 360 + 1 * 360;
+    tar = Math.random() * 6 * 360 + 1 * 360;
   }
   spd = 0;
   let tt = tar - o;
