@@ -1,31 +1,43 @@
+const WheelCentreX = 500;
+const WheelCentreY = 500;
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 function createSector(fromangle, angle) {
   const rad = (angle * Math.PI) / 180;
   const fromrad = (fromangle * Math.PI) / 180;
-  const x = 250 + 250 * Math.sin(rad);
-  const y = 250 - 250 * Math.cos(rad);
-  const fx = 250 + 250 * Math.sin(fromrad);
-  const fy = 250 - 250 * Math.cos(fromrad);
-  return `M250,250 L${fx},${fy} A250,250 0 ${
-    angle - fromangle > 180 ? 1 : 0
-  },1 ${x},${y} Z`;
+  const x = WheelCentreX + WheelCentreX * Math.sin(rad);
+  const y = WheelCentreY - WheelCentreY * Math.cos(rad);
+  const fx = WheelCentreX + WheelCentreX * Math.sin(fromrad);
+  const fy = WheelCentreY - WheelCentreY * Math.cos(fromrad);
+  return `M${WheelCentreX},${WheelCentreY} L${fx},${fy} A${WheelCentreX},${WheelCentreY} 0 ${angle - fromangle > 180 ? 1 : 0
+    },1 ${x},${y} Z`;
 }
-Rarcs = [5, 8, 23, 6, 10, 13, 20, 15];
+Rarcs = [3, 6, 21, 4, 8, 13, 20, 15, 10];
 Rtexts = [
-  "x个xxx", // 5
-  "x个xxx", //      3
+  "a个xxx",
+  "b个xxx",
   "谢谢惠顾",
-  "x元", //        3
-  "x元", //          2
-  "x元", //          1
-  "x毛", // 5
-  "x个xxx", //      1
+  "a元",
+  "b元",
+  "c元",
+  "x毛",
+  "c个yyy",
+  "再抽一次",
 ];
-Rcolours = ["pink", "red", "blue", "gray", "orange", "purple", "green", "cyan"];
+Rcolours = [
+  "rgba(226, 42, 0, 0.7)",
+  "rgba(215, 195, 16, 0.7)",
+  "rgba(22, 95, 168, 0.7)",
+  "rgba(64, 11, 125, 0.7)",
+  "rgba(238, 158, 11, 0.7)",
+  "rgba(54, 168, 22, 0.7)",
+  "rgba(90, 70, 140, 0.7)",
+  "rgba(38, 139, 24, 0.51)",
+  "rgba(6, 139, 106, 0.7)"
+];
 let w = [];
-for (let i = 0; i < 8; i++) {
+for (let i = 0; i <= 8; i++) {
   if (Rarcs[i] > 10) {
     let ww = Math.random() * 0.5 + 1.75;
     w.push([Rarcs[i] / ww, Rtexts[i], Rcolours[i]]);
@@ -38,18 +50,11 @@ w.sort(() => Math.random() - 0.5);
 
 function shuffleArrayWithConstraints(arr) {
   if (arr.length <= 2) return arr;
-
-  // 检查是否所有元素相同
-  const allSame = arr.every((val) => val === arr[0][2]);
-  if (allSame) throw new Error("无法满足约束条件");
-
-  // Fisher-Yates洗牌基础算法
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
 
-  // 处理相邻相同的情况
   for (let i = 1; i < arr.length; i++) {
     if (arr[i][2] === arr[i - 1][2]) {
       for (let j = i + 1; j < arr.length; j++) {
@@ -63,10 +68,7 @@ function shuffleArrayWithConstraints(arr) {
       }
     }
   }
-
-  // 确保首尾不同
   if (arr[0][2] === arr[arr.length - 1][2]) {
-    // 从后往前找到第一个可交换的元素
     for (let i = arr.length - 2; i > 0; i--) {
       if (arr[i][2] !== arr[0][2] && arr[i][2] !== arr[arr.length - 2][2]) {
         [arr[arr.length - 1], arr[i]] = [arr[i], arr[arr.length - 1]];
@@ -78,39 +80,34 @@ function shuffleArrayWithConstraints(arr) {
   return arr;
 }
 w = shuffleArrayWithConstraints(w);
-console.log(w);
 
 let n = 0,
   t = [];
 for (let i = 0; i < w.length; i++) {
   if (w[i][1] == "谢谢惠顾") {
     t.push(n);
-    console.log(n);
   }
   n += w[i][0] * 3.6;
 }
-const kk = -80;
+const kk = -90;
 let noww = "";
 function show(offset) {
   now = offset;
   document.getElementById("1").innerHTML = "";
   for (let i = 1; i <= w.length; i++) {
     document.getElementById("1").innerHTML += `
-            <path d="${createSector(now, now + w[i - 1][0] * 3.6)}" fill="${
-      w[i - 1][2]
-    }"/>
+            <path d="${createSector(now, now + w[i - 1][0] * 3.6)}" fill="${w[i - 1][2]
+      }"/>
             `;
+    textx = WheelCentreX + (WheelCentreX - 20) * Math.sin(((now + w[i - 1][0] * 1.8) / 180) * Math.PI);
+    texty = WheelCentreY - (WheelCentreY - 20) * Math.cos(((now + w[i - 1][0] * 1.8) / 180) * Math.PI);
+
     document.getElementById("1").innerHTML += `
-            <text x=${
-              250 + 1.414 * 150 * Math.sin(((now + 15) / 180) * Math.PI)
-            } transform="
-            rotate(${now + kk} ${
-      250 + 1.414 * 150 * Math.sin(((now + 15) / 180) * Math.PI)
-    }, ${250 - 1.414 * 150 * Math.cos(((now + 15) / 180) * Math.PI)})"
-            y=${
-              250 - 1.414 * 150 * Math.cos(((now + 15) / 180) * Math.PI)
-            } text-anchor="middle">
-            ${w[i - 1][1]}</text>
+            <text x=${textx} transform="
+            rotate(${now - w[i - 1][0] * 0.6 - 90} ${textx}, ${texty})"
+            y=${texty} text-anchor="end" style="font-family:arial">
+            <tspan style="font-weight:bold; font-size:45px">
+            ${w[i - 1][1]}</tspan></text>
             `;
     now += w[i - 1][0] * 3.6;
     if (now >= 450 && now - w[i - 1][0] * 3.6 <= 450) {
@@ -123,21 +120,31 @@ function show(offset) {
 }
 o = 0;
 kkk = 0;
+updatetable()
+function updatetable() {
+  st = "";
+  for(let i in Rtexts){
+    if(Rtexts[i] == "谢谢惠顾") continue;
+    st += "<tr><td>" + Rtexts[i] + "</td><td>" + (localStorage.getItem(Rtexts[i])??"0") + "个人抽中！</td></tr>";
+
+  }
+  document.querySelector("body > table:nth-child(3)").innerHTML = st;
+}
 async function rotate() {
   document.querySelector(
     "body > table > tbody > tr:nth-child(1) > td > button"
-  ).outerHTML = '<button onclick="rotate()" disabled>旋转</button>';
+  ).outerHTML = '<button onclick="rotate()" disabled style="font-weight:bold; font-size:55px">旋转</button>';
 
   let i = Math.random();
   let tar = 0;
-  if (i <= 0.5) {
-    //
+  if (i <= 0.4) {
     let k = Math.floor(Math.random() * 2);
+    // alert(6)
     tar =
       85 -
       t[k] +
       kkk -
-      Math.random() * 5 +
+      Math.random() * 10 +
       360 * Math.floor(Math.random() * 5 + 3);
   } else {
     tar = Math.random() * 6 * 360 + 1 * 360;
@@ -161,6 +168,10 @@ async function rotate() {
   o %= 360;
   document.querySelector(
     "body > table > tbody > tr:nth-child(1) > td > button"
-  ).outerHTML = '<button onclick="rotate()">旋转</button>';
+  ).outerHTML = '<button onclick="rotate()" style="font-weight:bold; font-size:55px">旋转</button>';
+  // tables[]++;
+  localStorage.setItem(w[noww][1], ""+((parseInt(localStorage.getItem(w[noww][1]) ?? "0") + 1)));
+  updatetable();
 }
+
 show(o);

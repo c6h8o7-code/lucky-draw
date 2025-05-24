@@ -1,29 +1,43 @@
 <html>
-    <head>
-        <title>
-            官方版抽奖系统
-        </title>
-    </head>
-    <body>
-        <svg id="1" width="500" height="500"></svg>
-        <svg id="2" width="20" height="500">
-            <path d="M0,250 L20, 260 L20, 240">
-                
-                </path>
+
+<head>
+    <title>
+        606版抽奖LLS
+    </title>
+    <!-- <header></header> -->
+    <link type="text/css" rel="stylesheet" href="./index.css" />
+</head>
+
+<body>
+    <!-- <img  src="./3fc54f2b553dc552c23fd2df0ee0159e.jpg"/> -->
+    <div style="width: auto">
+        <svg id="1" width="1000" height="1000"></svg>
+        <svg id="2" width="20" height="1000">
+            <path d="M0,500 L20,560 L20, 440">
+
+            </path>
         </svg>
-        
-        <table>
-            <tbody>
-                <tr>
-                    <td><button onclick="rotate()">旋转</button></td>
-                </tr>
-                <tr>
-                    <td><p>点击旋转！</p></td>
-                </tr>
-            </tbody>
-            </table>
-        </table>
+    </div>
+
+    <table style="position:relative; left:1080px; bottom: 40%;">
+        <tbody>
+            <tr>
+                <td><button onclick="rotate()" style="font-weight:bold; font-size:55px">旋转</button></td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="font-weight:bold; font-size:55px">点击旋转！</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table style="position: absolute;left:1580px;top:50;font-size:55px">
+        <tbody>
+            
+        </tbody>
+    </table>
     <script src="./index.js"></script>
 
-    </body>
+</body>
+
 </html>

@@ -1,0 +1,10 @@
+table,
+th,
+td {
+    border: 1px solid black;
+}
+
+body {
+    background-image: url('./3fc54f2b553dc552c23fd2df0ee0159e.jpg');
+    background-size: cover;
+}
