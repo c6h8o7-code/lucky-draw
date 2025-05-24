@@ -5,19 +5,20 @@
         </title>
     </head>
     <body>
-        <svg id="dynamicSector" width="200" height="200"></svg>
-
+        <svg id="dynamicSector1" width="200" height="200"></svg>
 <script>
-    function createSector(angle) {
-    const rad = angle * Math.PI / 180;
+    function createSector(fromangle, angle) {
+    const rad = (fromangle + angle) * Math.PI / 180;
+    const fromrad = fromangle * Math.PI / 180;
     const x = 100 + 100 * Math.sin(rad);
     const y = 100 - 100 * Math.cos(rad);
-    
-    return `M100,100 L100,0 A100,100 0 ${angle > 180 ? 1 : 0},1 ${x},${y} Z`;
+    const fx = 100 + 100 * Math.sin(fromrad);
+    const fy = 100 - 100 * Math.cos(fromrad);
+    return `M${x},${y} L100,0 A100,100 0 ${angle > 180 ? 1 : 0},1 ${x},${y} Z`;
     }
 
-    document.getElementById('dynamicSector').innerHTML = `
-    <path d="${createSector(120)}" fill="green"/>
+    document.getElementById('dynamicSector1').innerHTML = `
+    <path d="${createSector(60, 120)}" fill="green"/>
     `;
     </script>
 
