@@ -11,8 +11,8 @@
     const rad = angle * Math.PI / 180;
     const fromrad = fromangle * Math.PI / 180;
     const rrad = rad + fromrad;
-    const x = 100 + 100 * Math.sin(rrad);
-    const y = 100 - 100 * Math.cos(rrad);
+    const x = 100 + 100 * Math.sin(rad);
+    const y = 100 - 100 * Math.cos(rad);
     const fx = 100 + 100 * Math.sin(fromrad);
     const fy = 100 - 100 * Math.cos(fromrad);
     return `M100,100 L${x},${y} A100,100 0 ${angle > 180 ? 1 : 0},1 ${x},${y} Z`;
