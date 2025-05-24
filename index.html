@@ -14,7 +14,7 @@
     const y = 100 - 100 * Math.cos(rad);
     const fx = 100 + 100 * Math.sin(fromrad);
     const fy = 100 - 100 * Math.cos(fromrad);
-    return `M${x},${y} L100,0 A100,100 0 ${angle > 180 ? 1 : 0},1 ${x},${y} Z`;
+    return `M100,100 L${x},${y} A100,100 0 ${angle > 180 ? 1 : 0},1 ${x},${y} Z`;
     }
 
     document.getElementById('dynamicSector1').innerHTML = `
