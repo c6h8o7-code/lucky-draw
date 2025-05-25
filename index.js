@@ -149,7 +149,7 @@ kkk = 0;
 music.playbackRate = 12;
 music.volume = 1;
 async function rotate() {
-  setButtonState("disable")
+  setButtonState("disabled")
 
 
   let i = Math.random();
