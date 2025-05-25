@@ -6,5 +6,8 @@ td {
 
 body {
     background-image: url('./3fc54f2b553dc552c23fd2df0ee0159e.jpg');
-    background-size: cover;
+    background-size: 99.9% 99.9%;
+}
+div {
+    margin: 0
 }
