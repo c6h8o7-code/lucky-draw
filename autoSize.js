@@ -23,7 +23,7 @@ let setButtonState = (state)=>{
       ).outerHTML = `<button onclick="rotate()" style="font-weight:bold; font-size:${WheelCentreY / 10 / 1.5}px" ${state}>旋转</button>`
 }
 setButtonState("")
-document.querySelector("body > table:nth-child(3)").outerHTML = `<table style="position: absolute;left:${WheelCentreX*2+80};top:0;font-size:${WheelCentreY / 10 / 1.5}px">
+document.querySelector("body > table:nth-child(3)").outerHTML = `<table style="position: absolute;right:${100}px;top:0;font-size:${WheelCentreY / 10 / 1.5}px">
         <tbody>
             
         </tbody>
