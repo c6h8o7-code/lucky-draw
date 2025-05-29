@@ -166,8 +166,8 @@ let o = 0;
 let kkk = 0;
 let omgwow = 0;
 function setOmg(){
-  omgwow = 1;
-  console.log(666)
+  omgwow += 1;
+  // console.log(666)
 }
 music.playbackRate = 12;
 music.volume = 1;
@@ -177,7 +177,7 @@ async function rotate() {
 
   let i = Math.random();
   let tar = 0;
-  if(omgwow){
+  if(omgwow + "" == localStorage.getItem("0.5元")){
     tar =
     90 - tttt[0] +
     kkk - 
